@@ -31,11 +31,11 @@ class _ChatPageState extends State<ChatPage> {
 
     try {
       final apiServiece = ApiServiceChatGPT();
-      final respoonse = await apiServiece.GetAPI(userMessage);
+      final response = await apiServiece.GetAPI(userMessage);
       setState(() {
         _chatHistory.add({
-          "message": respoonse,
-          "isSender": true,
+          "message": response,
+          "isSender": false,
         });
       });
       _scrollController.animateTo(_scrollController.position.maxScrollExtent,
@@ -43,7 +43,7 @@ class _ChatPageState extends State<ChatPage> {
     } catch (e) {
       setState(() {
         _chatHistory.add({
-          "message": "Error: Unable to get response from AI",
+          "message": "Error: Unable to get response from AI ${e.toString()}",
           "isSender": false,
         });
       });
